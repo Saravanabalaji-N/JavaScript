@@ -1,0 +1,133 @@
+1. program to find the largest among three numbers
+
+const num1 = parseFloat(prompt("Enter first number: "));
+const num2 = parseFloat(prompt("Enter second number: "));
+const num3 = parseFloat(prompt("Enter third number: "));
+let largest;
+
+if(num1 >= num2 && num1 >= num3) {
+    largest = num1;
+}
+else if (num2 >= num1 && num2 >= num3) {
+    largest = num2;
+}
+else {
+    largest = num3;
+}
+console.log("The largest number is " + largest);
+
+2. program to generate a multiplication table
+
+const number = parseInt(prompt('Enter an integer: '));
+
+for(let i = 1; i <= 10; i++) {
+
+    const result = i * number;
+     
+    console.log(`${number} * ${i} = ${result}`);
+}
+
+3. Find Missing Number
+javascript
+Copy code
+function findMissingNumber(arr) {
+    const n = arr.length;
+    const expectedSum = (n * (n + 1)) / 2;
+    const actualSum = arr.reduce((sum, num) => sum + num, 0);
+    return expectedSum - actualSum;
+}
+4. Rotate Array
+javascript
+Copy code
+function rotateArray(arr, steps) {
+    const n = arr.length;
+    steps = steps % n;
+    return arr.slice(-steps).concat(arr.slice(0, -steps));
+}
+5. Longest Substring Without Repeating Characters
+javascript
+Copy code
+function longestSubstringWithoutRepeating(str) {
+    let map = new Map();
+    let start = 0, maxLength = 0;
+
+    for (let end = 0; end < str.length; end++) {
+        if (map.has(str[end])) {
+            start = Math.max(map.get(str[end]) + 1, start);
+        }
+        map.set(str[end], end);
+        maxLength = Math.max(maxLength, end - start + 1);
+    }
+
+    return maxLength;
+}
+6. Find Intersection of Two Arrays
+javascript
+Copy code
+function intersection(arr1, arr2) {
+    const set1 = new Set(arr1);
+    return [...new Set(arr2.filter(item => set1.has(item)))];
+}
+7. Group Anagrams
+javascript
+Copy code
+function groupAnagrams(strs) {
+    const map = new Map();
+    for (const str of strs) {
+        const sorted = str.split('').sort().join('');
+        if (!map.has(sorted)) {
+            map.set(sorted, []);
+        }
+        map.get(sorted).push(str);
+    }
+    return [...map.values()];
+}
+8. Deep Clone an Object
+javascript
+Copy code
+function deepClone(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+9. Find All Pairs with a Given Sum
+javascript
+Copy code
+function findPairsWithSum(arr, target) {
+    const pairs = [];
+    const seen = new Set();
+
+    for (const num of arr) {
+        const complement = target - num;
+        if (seen.has(complement)) {
+            pairs.push([complement, num]);
+        }
+        seen.add(num);
+    }
+
+    return pairs;
+}
+10. Implement a Simple Event Emitter
+javascript
+Copy code
+class EventEmitter {
+    constructor() {
+        this.events = {};
+    }
+
+    on(event, listener) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+        this.events[event].push(listener);
+    }
+
+    emit(event, ...args) {
+        if (this.events[event]) {
+            this.events[event].forEach(listener => listener(...args));
+        }
+    }
+
+    off(event, listener) {
+        if (!this.events[event]) return;
+        this.events[event] = this.events[event].filter(l => l !== listener);
+    }
+}
